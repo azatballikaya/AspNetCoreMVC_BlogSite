@@ -1270,11 +1270,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Azat\\Documents\\GitHub\\AspNetCore_Works\\BlogApp\\BlogApp\\BlogApp.csproj",
+      "projectUniqueName": "C:\\Users\\Azat\\Documents\\GitHub\\AspNetCore_Works\\AspNetCoreMVC_BlogSite\\BlogApp.csproj",
       "projectName": "BlogApp",
-      "projectPath": "C:\\Users\\Azat\\Documents\\GitHub\\AspNetCore_Works\\BlogApp\\BlogApp\\BlogApp.csproj",
+      "projectPath": "C:\\Users\\Azat\\Documents\\GitHub\\AspNetCore_Works\\AspNetCoreMVC_BlogSite\\BlogApp.csproj",
       "packagesPath": "C:\\Users\\Azat\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Azat\\Documents\\GitHub\\AspNetCore_Works\\BlogApp\\BlogApp\\obj\\",
+      "outputPath": "C:\\Users\\Azat\\Documents\\GitHub\\AspNetCore_Works\\AspNetCoreMVC_BlogSite\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Azat\\AppData\\Roaming\\NuGet\\NuGet.Config",

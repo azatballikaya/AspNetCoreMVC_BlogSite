@@ -1,0 +1,64 @@
+@model Post
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="bg-white p-4">
+                <h1 class="h4 mb-4">@Model.Title</h1>
+                <div class="tags">
+                    @foreach(var item in Model.Tags){
+                        <a href="/posts/tag/@item.Url" class="badge bg-@item.Color bg-opacity-10 text-@item.Color mb-2 fw-bold">@item.Text</a>
+                    }
+                </div>
+              
+                                    <img src="~/img/@Model.Image" class="img-fluid rounded" alt="">
+                                    <div>@Model.Content</div>
+    
+
+            </div>
+            <div class="bg-white mt-3">
+                <div class="card border-0">
+                    <div class="card-header pb-0">
+                        <h4>@Model.Comments.Count()</h4>
+                    </div>
+                    <div class="card-body">
+                        @foreach(var comment in Model.Comments){
+                        <div class="my-3 d-flex">
+                            <img src="~/img/@comment.User.Image" alt="" class="avatar rounded-circle float-start me-3">
+                           <div>
+                            <div class="mb-2 d-flex">
+                                <h6 class="me-2">@comment.User.UserName</h6>
+                                <small>@comment.PublishedOn.ToString("d")</small>
+                            </div>
+                            <p>@comment.Text</p>
+                        </div>
+                        </div>
+                        }
+                        <hr class="my-4">
+                        <div>
+                            <h4>Yorum Ekle</h4>
+                            <form action="/posts/AddComment" method="post">
+                            <input type="hidden" name="Url" value="@Model.Url">
+                            <input type="hidden" name="PostId" value="@Model.PostId">
+                             <div class="col-md-12">
+                                <label for="UserName" class="form-label">Kullanıcı Adı</label>
+                                <input type="text" name="UserName" id="UserName" rows="3" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="Text" class="form-label">Yorum</label>
+                                <textarea type="text" name="Text" id="Text" rows="3" class="form-control"></textarea>
+                            </div>
+                             <br>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Yorum Yap</button>
+                               
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <vc:tags-menu></vc:tags-menu>
+            <vc:new-posts></vc:new-posts>
+             </div>
+    </div>

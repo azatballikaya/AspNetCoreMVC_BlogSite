@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gAbl1SmCPSQxRvQ4pLGPda7xoBl5hH211MMGKbQKGXcotNmXW40Lzgs9cRkVexGRPGjTPi5ZNyZDgpre2uagRQ==",
+  "dgSpecHash": "/ef/UOFozimB8GIBrCsQQ5Hx/mzttzDQz7qINA+nL5gBdXXGnPnJ+MVDOqmGb0yAkT8DZ2LY+MIT/0wexfkZMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Azat\\Documents\\GitHub\\AspNetCore_Works\\BlogApp\\BlogApp\\BlogApp.csproj",
+  "projectFilePath": "C:\\Users\\Azat\\Documents\\GitHub\\AspNetCore_Works\\AspNetCoreMVC_BlogSite\\BlogApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Azat\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Azat\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.10\\microsoft.data.sqlite.core.7.0.10.nupkg.sha512",
