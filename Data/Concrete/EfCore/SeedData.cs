@@ -20,8 +20,8 @@ namespace BlogApp.Data.Concrete.EfCore{
                 }
                 if(!context.Users.Any()){
                     context.Users.AddRange(
-                        new Entity.User{UserName="ahmetcakar",Image="p1.jpg"},
-                        new Entity.User{UserName="mehmetyilmaz",Image="p2.jpg"}
+                         new Entity.User{UserName="ahmetcakar", Name="Ahmet Çakar",Email="info@abc.com",Password="123456",Image="p1.jpg"},
+                        new Entity.User{UserName="cinarturan", Name="Çınar Turan",Email="info@info.com",Password="123123",Image="p1.jpg"}
                     );
                     context.SaveChanges();
                 }
@@ -34,7 +34,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                             IsActive=true,
                             PublishedOn=DateTime.Now.AddDays(-10),
                             Tags=context.Tags.Take(3).ToList(),
-                            Image="1.jpg",
+                            PostImage="1.jpg",
                             UserId=1,
                             Comments=new List<Comment>{
                                 new Comment{
@@ -52,7 +52,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                             IsActive=true,
                             PublishedOn=DateTime.Now.AddDays(-20),
                             Tags=context.Tags.Take(2).ToList(),
-                            Image="2.jpg",
+                           PostImage="2.jpg",
                             UserId=1,
                             
                         },
@@ -63,7 +63,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                             IsActive=true,
                             PublishedOn=DateTime.Now.AddDays(-5),
                             Tags=context.Tags.Take(4).ToList(),
-                            Image="3.jpg",
+                           PostImage="3.jpg",
                             UserId=1,
                             
                         },
@@ -74,7 +74,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                             IsActive=true,
                             PublishedOn=DateTime.Now.AddDays(-10),
                             Tags=context.Tags.Take(4).ToList(),
-                            Image="3.jpg",
+                           PostImage="3.jpg",
                             UserId=1,
                             
                         },
@@ -85,7 +85,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                             IsActive=true,
                             PublishedOn=DateTime.Now.AddDays(-20),
                             Tags=context.Tags.Take(4).ToList(),
-                            Image="3.jpg",
+                           PostImage="3.jpg",
                             UserId=1,
                             
                         },
@@ -96,7 +96,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                             IsActive=true,
                             PublishedOn=DateTime.Now.AddDays(-40),
                             Tags=context.Tags.Take(4).ToList(),
-                            Image="3.jpg",
+                           PostImage="3.jpg",
                             UserId=1,
                             
                         }

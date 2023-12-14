@@ -19,6 +19,7 @@ namespace BlogApp.Controllers{
             
         }
         public async Task<IActionResult> Index(string url){
+            var claims=User.Claims;
             var posts=_postRepository.Posts;
           if(!string.IsNullOrEmpty(url)){
             posts=posts.Where(x=>x.Tags.Any(t=>t.Url==url));
@@ -31,7 +32,8 @@ namespace BlogApp.Controllers{
         public async Task<IActionResult> Details(string? url){
            return View(await _postRepository.Posts.Include(x=>x.Tags).Include(y=>y.Comments).ThenInclude(z=>z.User).FirstOrDefaultAsync(x=>x.Url==url) );
         }
-        public async Task<IActionResult> AddComment(int PostId,string UserName,string Text,string Url){
+        [HttpPost]
+        public JsonResult AddComment(int PostId,string UserName,string Text,string Url){
             var entity=new Comment{
                 Text=Text,
                 PublishedOn=DateTime.Now,
@@ -39,7 +41,12 @@ namespace BlogApp.Controllers{
                 User=new User{UserName=UserName,Image="avatar.jpg"}
             };
             _commentRepository.CreateComment(entity);
-            return Redirect("/posts/details/"+Url);
+            return Json(new {
+                UserName,
+                Text,
+                entity.PublishedOn,
+                entity.User.Image
+            });
         }
     }
 }

@@ -9,7 +9,7 @@
                     }
                 </div>
               
-                                    <img src="~/img/@Model.Image" class="img-fluid rounded" alt="">
+                                    <img src="~/img/@Model.PostImage" class="img-fluid rounded" alt="">
                                     <div>@Model.Content</div>
     
 
@@ -20,6 +20,7 @@
                         <h4>@Model.Comments.Count()</h4>
                     </div>
                     <div class="card-body">
+                        <div id="comments">
                         @foreach(var comment in Model.Comments){
                         <div class="my-3 d-flex">
                             <img src="~/img/@comment.User.Image" alt="" class="avatar rounded-circle float-start me-3">
@@ -32,15 +33,16 @@
                         </div>
                         </div>
                         }
+                        </div>
                         <hr class="my-4">
                         <div>
                             <h4>Yorum Ekle</h4>
                             <form action="/posts/AddComment" method="post">
                             <input type="hidden" name="Url" value="@Model.Url">
-                            <input type="hidden" name="PostId" value="@Model.PostId">
+                            <input type="hidden" id="PostId" name="PostId" value="@Model.PostId">
                              <div class="col-md-12">
                                 <label for="UserName" class="form-label">Kullanıcı Adı</label>
-                                <input type="text" name="UserName" id="UserName" rows="3" class="form-control">
+                                <input type="text"  name="UserName" id="UserName" rows="3" class="form-control">
                             </div>
                             <div class="col-md-12">
                                 <label for="Text" class="form-label">Yorum</label>
@@ -48,7 +50,7 @@
                             </div>
                              <br>
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Yorum Yap</button>
+                                <button  type="submit" class="btn btn-primary">Yorum Yap</button>
                                
                             </div>
                             </form>
@@ -62,3 +64,38 @@
             <vc:new-posts></vc:new-posts>
              </div>
     </div>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#btnYorumKayit").click(function(){
+            $.ajax({
+                type:'POST',
+                url:'@Url.Action("AddComment")',
+                dataType:'json'
+                data:{
+                    PostId:$("#PostId").val(),
+                    UserName:$("#UserName").val(),
+                    Text:$("#Text").val(),
+
+                },
+                success:function(yorum){
+                    $("comments").append(`<div class="my-3 d-flex">
+                            <img src="~/img/${yorum.Image}" alt="" class="avatar rounded-circle float-start me-3">
+                           <div>
+                            <div class="mb-2 d-flex">
+                                <h6 class="me-2">${yorum.UserName}</h6>
+                                <small>${yorum.PublishedOn}</small>
+                            </div>
+                            <p>${yorum.Text}</p>
+                        </div>
+                        </div>`);
+                        $("#UserName").val('');
+                        $("#Text").val('');
+                }
+            });
+            return false;
+        });
+    }
+    );</script>
+}
