@@ -18,6 +18,8 @@ namespace BlogApp.Controllers{
             _userRepository=userRepository;
         }
       public IActionResult Login(){
+        if(User.Identity.IsAuthenticated)
+        return RedirectToAction("Index","Posts");
         return View();
       }
       [HttpPost]
@@ -29,6 +31,7 @@ namespace BlogApp.Controllers{
           userClaims.Add(new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()));
           userClaims.Add(new Claim(ClaimTypes.Name,user.UserName.ToString() ?? ""));
           userClaims.Add(new Claim(ClaimTypes.GivenName,user.Name.ToString() ?? ""));
+          userClaims.Add(new Claim(ClaimTypes.UserData,user.Image.ToString() ?? ""));
           if(user.Email=="info@abc.com"){
             userClaims.Add(new Claim(ClaimTypes.Role,"admin"));
           }
@@ -47,6 +50,39 @@ namespace BlogApp.Controllers{
         
         return View(model);
       }
+      [HttpGet]
+      public IActionResult Register(){
+        return View();
+      }
+      [HttpPost]
+      public async Task<IActionResult> Register(RegisterViewModel model){
+        if(ModelState.IsValid){
+          var user=_userRepository.Users.FirstOrDefaultAsync(x=>x.Email==model.Email || x.UserName==model.Email);
+          if(user!=null){
+            _userRepository.CreateUser(new Entity.User{
+              UserName=model.UserName,
+              Name=model.Name,
+              Email=model.Email,
+              Password=model.Password,
+              Image="avatar.jpg"
+            });
+            return RedirectToAction("Login");
+          }
+          else{
+            ModelState.AddModelError("","UserName veya Email kullanımda.");
+            return View(model);
+          }
+          
 
+        }
+        else{
+          return View(model);
+        }
+      }
+
+      public async Task<IActionResult> Logout(){
+          await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+          return RedirectToAction("Login");
+      }
     }
 }
