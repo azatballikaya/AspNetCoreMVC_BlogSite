@@ -29,6 +29,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                     context.Posts.AddRange(
                         new Entity.Post{
                             Title="asp.net core",
+                            Description="asp.net core",
                             Content="Asp.net core dersleri",
                             Url="aspnet-core",
                             IsActive=true,
@@ -48,6 +49,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                         new Entity.Post{
                             Title="Php",
                             Content="Php dersleri",
+                            Description="Php dersleri",
                              Url="php",
                             IsActive=true,
                             PublishedOn=DateTime.Now.AddDays(-20),
@@ -58,6 +60,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                         },
                         new Entity.Post{
                             Title="Django",
+                            Description="Django",
                             Content="Django dersleri",
                             Url="django",
                             IsActive=true,
@@ -69,6 +72,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                         },
                         new Entity.Post{
                             Title="React Dersleri",
+                            Description="React Dersleri",
                             Content="React dersleri",
                             Url="react-dersleri",
                             IsActive=true,
@@ -80,6 +84,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                         },
                         new Entity.Post{
                             Title="Angular",
+                            Description="Angular",
                             Content="Angular dersleri",
                             Url="angular",
                             IsActive=true,
@@ -91,6 +96,7 @@ namespace BlogApp.Data.Concrete.EfCore{
                         },
                         new Entity.Post{
                             Title="Web Tasarım",
+                            Description="Web Tasarım",
                             Content="Web Tasarım dersleri",
                             Url="web-tasarim",
                             IsActive=true,

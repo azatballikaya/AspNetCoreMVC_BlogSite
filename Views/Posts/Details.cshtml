@@ -8,9 +8,13 @@
                         <a href="/posts/tag/@item.Url" class="badge bg-@item.Color bg-opacity-10 text-@item.Color mb-2 fw-bold">@item.Text</a>
                     }
                 </div>
+                <ul class="list-inline my-3 ">
+                <li class="list-inline-item"><i class="bi bi-calendar"></i> @Model.PublishedOn.ToString("d")</li>
+                <li class="list-inline-item"><i class="bi bi-person-circle"></i> <a href="/profile/@Model.User.UserName">@Model.User.Name</a> </li>
+            </ul>
               
                                     <img src="~/img/@Model.PostImage" class="img-fluid rounded" alt="">
-                                    <div>@Model.Content</div>
+                                    <div>@Html.Raw(@Model.Content)</div>
     
 
             </div>
@@ -26,7 +30,7 @@
                             <img src="~/img/@comment.User.Image" alt="" class="avatar rounded-circle float-start me-3">
                            <div>
                             <div class="mb-2 d-flex">
-                                <h6 class="me-2">@comment.User.UserName</h6>
+                                <h6 class="me-2"><a href="/profile/@comment.User.UserName">@comment.User.UserName</a></h6>
                                 <small>@comment.PublishedOn.ToString("d")</small>
                             </div>
                             <p>@comment.Text</p>

@@ -15,5 +15,17 @@ namespace BlogApp.Data.Concrete.EfCore{
             _context.Posts.Add(post);
             _context.SaveChanges();
         }
+        public void EditPost(Post post){
+            var updated=_context.Posts.FirstOrDefault(x=>x.PostId==post.PostId);
+            if(updated!=null){
+                updated.Title=post.Title;
+                updated.Description=post.Description;
+                updated.Content=post.Content;
+                updated.Url=post.Url;
+                updated.IsActive=post.IsActive;
+
+            }
+            _context.SaveChanges();
+        }
     }
 }

@@ -84,5 +84,10 @@ namespace BlogApp.Controllers{
           await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
           return RedirectToAction("Login");
       }
+      public IActionResult Profile(string username){
+        if(string.IsNullOrEmpty(username))
+        return NotFound();
+        return View(_userRepository.Users.Include(y=>y.Posts).Include(z=>z.Comments).ThenInclude(z=>z.Post).FirstOrDefault(x=>x.UserName==username));
+      }
     }
 }
