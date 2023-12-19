@@ -1,9 +1,10 @@
 @model PostCreateViewModel
+<form asp-action="Edit" asp-controller="Posts" method="post">
 <div class="row">
-    <div class="col-12">
-        <h1>Post Oluştur</h1>
+    <div class="col-9">
+        <h1>Post Düzenle</h1>
         <div class="bg p-4">
-              <form asp-action="Edit" asp-controller="Posts" method="post">
+              
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PostId">
             <div class="mb-3">
@@ -34,11 +35,31 @@
             }
             
             <button type="submit" class="btn btn-primary">Kaydet</button>
-        </form>
+       
         </div>
       
     </div>
+    <div class="col-3">
+        <div class="bg-white p-4">
+            @foreach(var item in ViewBag.Tags){
+            <div class="form-check">
+         <input class="form-check-input"
+          name="tagIds" 
+         type="checkbox"
+          value="@item.TagId" 
+         id="tag_@item.TagId" 
+         @(Model.Tags.Any(i=>i.TagId==item.TagId)?"checked":"")
+        
+         >
+         <label class="form-check-label" for="tag_@item.TagId">
+             @item.Text
+        </label>
 </div>
+}
+        </div>
+    </div>
+</div>
+ </form>
 @section Scripts{
     
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js" integrity="sha512-6JR4bbn8rCKvrkdoTJd/VFyXAN4CE9XMtgykPWgKiHjou56YDJxWsi90hAeMTYxNwUnKSQu9JPc3SQUg+aGCHw==" crossorigin="anonymous" referrerpolicy="no-referrer">

@@ -13,6 +13,7 @@ namespace BlogApp.Controllers{
         private IPostRepository _postRepository;
         private ITagRepository _tagRepository;
         private ICommentRepository _commentRepository;
+       
         public PostsController(IPostRepository postRepository,ITagRepository tagRepository,ICommentRepository commentRepository)
         { 
             _postRepository=postRepository;
@@ -94,21 +95,23 @@ namespace BlogApp.Controllers{
        public IActionResult Edit(int? id){
         if(id==null)
         return NotFound();
-        var post=_postRepository.Posts.FirstOrDefault(x=>x.PostId==id);
+        var post=_postRepository.Posts.Include(x=>x.Tags).FirstOrDefault(x=>x.PostId==id);
         if(post==null)
         return NotFound();
+        ViewBag.Tags=_tagRepository.Tags.ToList();
         return View(new PostCreateViewModel{
             PostId=post.PostId,
             Title=post.Title,
             Description=post.Description,
             Content=post.Content,
             Url=post.Url,
-            IsActive=post.IsActive
+            IsActive=post.IsActive,
+            Tags=post.Tags
         });
        }
        [Authorize]
        [HttpPost]
-       public IActionResult Edit(PostCreateViewModel model){
+       public IActionResult Edit(PostCreateViewModel model,int[] tagIds){
         if(ModelState.IsValid){
             var entityToUpdate=new Post{
                 PostId=model.PostId,
@@ -117,6 +120,10 @@ namespace BlogApp.Controllers{
                 Content=model.Content,
                 Url=model.Url
             };
+            foreach(var item in tagIds){
+                var tag=_tagRepository.Tags.FirstOrDefault(x=>x.TagId==item);
+                entityToUpdate.Tags.Add(tag);
+            }
             if(User.FindFirstValue(ClaimTypes.Role)=="admin"){
                 entityToUpdate.IsActive=model.IsActive;
             }
